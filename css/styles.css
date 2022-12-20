@@ -14,6 +14,8 @@
     --card-item-border: #F4F4FD;
     --customers-icon: #8E8F99; 
     --soc-media-hover-bg-color: #31D0AA;
+    --modal-bg-color: #fcfcfc;
+    --modal-color: #000000;
 }
 /* index+portfolio */
 body {
@@ -100,6 +102,8 @@ h1, h2, h3, p {
     font-weight: 500;
     
     color: var(--secondary-text-color);
+
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .site-nav .link:hover,
 .site-nav .link:focus {
@@ -107,6 +111,21 @@ h1, h2, h3, p {
 }
 .site-nav .link:active {
     color: var(--primary-brand-color);
+}
+.item-nav {
+    position: relative;
+}
+.link.current::after {
+    position: absolute;
+    content:'';
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+    height: 4px;
+    background-color: var(--primary-brand-color);
+
+    border-radius: 2px;
 }
 .contacts {
     margin-left: auto;
@@ -118,6 +137,8 @@ h1, h2, h3, p {
 }
 .contacts .link {
     color: currentColor;
+
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .contacts .link:hover,
 .contacts .link:focus {
@@ -171,6 +192,9 @@ h1, h2, h3, p {
     font-family: inherit;
 
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .hero-button:hover,
 .hero-button:focus {
@@ -323,6 +347,9 @@ h1, h2, h3, p {
 
     border: 1px solid var(--customers-icon);
     border-radius: 4px;
+
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    border 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .link-customers:hover,
 .link-customers:focus {
@@ -391,10 +418,80 @@ h1, h2, h3, p {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    border-radius: 50%;
+
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-.item-soc-media:hover,
-.item-soc-media:focus {
+.link-soc-media:hover,
+.link-soc-media:focus {
     background-color: var(--soc-media-hover-bg-color);
+}
+/* Backdrop */
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    
+    width: 100%;
+    height: 100%;
+
+    transform: scale(1);
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    background-color: rgba(46, 47, 66, 0.4);
+}
+.backdrop.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: scale(1.3, 0.4);
+}
+
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    width: 408px;
+    height: 576px;
+
+    background-color: var(--modal-bg-color);
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 2px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+
+.modal-btn-close {
+    margin-top: 24px;
+    margin-left: 360px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+
+    width: 24px;
+    height: 24px;
+
+    color: var(--modal-color);
+    background-color: var(--accent-color);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+
+    transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    cursor: pointer;
+}
+
+
+.modal-btn-close:hover,
+.modal-btn-close:focus {
+    box-shadow: 0px 1px 6px rgba(46, 47, 66, 0.08), 0px 1px 1px rgba(46, 47, 66, 0.16), 0px 2px 1px rgba(46, 47, 66, 0.08);
+    border-color: transparent;
 }
 
 /* Portfolio.html */
@@ -425,6 +522,9 @@ h1, h2, h3, p {
     color: var(--primary-brand-color);
     cursor: pointer;
     font-family: inherit;
+
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 250ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .btn:hover,
 .btn:focus {
@@ -455,11 +555,53 @@ h1, h2, h3, p {
     
     border-bottom: 0.5px solid var(--card-item-border);
     box-shadow: 0px 1px 6px rgba(46, 47, 66, 0.08);
+
+    transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .card-item:hover,
 .card-item:focus {
     box-shadow: 0px 1px 6px rgba(46, 47, 66, 0.08), 0px 1px 1px rgba(46, 47, 66, 0.16), 0px 2px 1px rgba(46, 47, 66, 0.08);
 }
+.animation-card {
+    position: relative;
+
+    overflow: hidden;
+}
+.animation-card::before {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+
+    background-color: var(--primary-brand-color);
+
+    transform: translateY(100%);
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.link-animation-card:hover .animation-card::before, 
+.link-animation-card:focus .animation-card::before {
+    transform: translateY(0);
+}
+.animation-card-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    padding-top: 40px;
+    padding-left: 32px;
+    padding-right: 32px;
+
+    color: var(--card-item-border);
+
+    transform: translateY(191%);
+
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.link-animation-card:hover .animation-card-text, 
+.link-animation-card:focus .animation-card-text {
+    transform: translateY(0)
+}
+
 .text-card {
     padding-top: 32px;
     padding-bottom: 32px;
